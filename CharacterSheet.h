@@ -46,9 +46,13 @@ public:
 		}
 	}
 };
-void print_character_informations(Character new_character) 
+void write_character_informations(Character new_character) 
 {
-	std::cout << "my name is" << " " << new_character._name << std::endl;
-	std::cout << "I am a" << " " << new_character.getSpecie() << std::endl;
-	std::cout << "I'm also a" << " " << new_character.getClass() << std::endl;
+	std::ofstream file;
+	file.open("character_save.txt");
+	std::fstream character_save("character_save.txt", std::ios::app);
+	character_save << new_character._name << std::endl;
+	character_save << new_character.getSpecie() << std::endl;
+	character_save << new_character.getClass() << std::endl;
+	file.close();
 }

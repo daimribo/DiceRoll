@@ -2,7 +2,6 @@
 #include <string>
 #include <cstdlib>
 #include "CharacterSheet.h"
-std::fstream character_save_1("character_save_1.txt", std::ios::app);
 int main()
 {
     std::string character_name;
@@ -17,5 +16,5 @@ int main()
     std::cout << "what's your character's class?\n";
     std::cin >> ClassInput;
     Character new_character(character_name, static_cast<SPECIE>(SpecieInput -1), static_cast<CLASS>(ClassInput -1));
-    print_character_informations(new_character);
+    write_character_informations(new_character);
 }
