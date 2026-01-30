@@ -2,8 +2,17 @@
 #include <string>
 #include <cstdlib>
 #include "CharacterSheet.h"
+int starting_menu() 
+{
+    int UsersChoice;
+    std::cout << "0*------------------*0\n";
+    std::cout << "I  [1]New Character  I\n";
+    std::cin >> UsersChoice;
+    return UsersChoice;
+}
 void create_character() 
 {
+    std::cin.ignore();
     attributes attr;
     std::string character_name;
     int SpecieInput;
@@ -55,9 +64,11 @@ void create_character()
     std::cout << "what's your character's class?\n";
     std::cin >> ClassInput;
     Character new_character(character_name, static_cast<SPECIE>(SpecieInput - 1), static_cast<CLASS>(ClassInput - 1), attr);
-    enter_character_informations(new_character);
+    enter_character_save(2, new_character);
 }
 int main()
 {
-    create_character();
+    int menu_selection = starting_menu();
+    if (menu_selection == 1)
+        create_character();
 }

@@ -81,19 +81,38 @@ void getAttributes()
 		std::cout << "[" << i + 1 << "]" << " " << attribute_pick[i] << std::endl;
 	}
 }
-void enter_character_informations(Character new_character) 
+void enter_into_file(Character new_character, std::fstream &save) 
 {
-	std::ofstream file;
-	file.open("character_save.txt");
-	std::fstream character_save("character_save.txt", std::ios::app);
-	character_save << new_character._name << std::endl;
-	character_save << new_character.getSpecie() << std::endl;
-	character_save << new_character.getClass() << std::endl;
-	character_save << new_character._attr.strength << std::endl;
-	character_save << new_character._attr.dexterity << std::endl;
-	character_save << new_character._attr.constitution << std::endl;
-	character_save << new_character._attr.intelligence << std::endl;
-	character_save << new_character._attr.wisdom << std::endl;
-	character_save << new_character._attr.charisma << std::endl;
-	file.close();
+	save << new_character._name << std::endl;
+	save << new_character.getSpecie() << std::endl;
+	save << new_character.getClass() << std::endl;
+	save << new_character._attr.strength << std::endl;
+	save << new_character._attr.dexterity << std::endl;
+	save << new_character._attr.constitution << std::endl;
+	save << new_character._attr.intelligence << std::endl;
+	save << new_character._attr.wisdom << std::endl;
+	save << new_character._attr.charisma << std::endl;
+}
+void enter_character_save(int save_number, Character new_character) 
+{
+	std::ofstream save;
+	if (save_number == 1) 
+	{
+		save.open("character_save_1.txt");
+		std::fstream save("character_save_1.txt", std::ios::app);
+		enter_into_file(new_character, save);
+	}
+	if (save_number == 2)
+	{
+		save.open("character_save_2.txt");
+		std::fstream save("character_save_2.txt", std::ios::app);
+		enter_into_file(new_character, save);
+	}
+	if (save_number == 3)
+	{
+		save.open("character_save_3.txt");
+		std::fstream save("character_save_3.txt", std::ios::app);
+		enter_into_file(new_character, save);
+	}
+	save.close();
 }
