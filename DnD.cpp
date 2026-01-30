@@ -10,6 +10,16 @@ int starting_menu()
     std::cin >> UsersChoice;
     return UsersChoice;
 }
+int available_saves() 
+{
+    int UsersChoice;
+    std::cout << "save slot 1: " << save_print(1) << std::endl;
+    std::cout << "save slot 2: " << save_print(2) << std::endl;
+    std::cout << "save slot 3: " << save_print(3) << std::endl;
+    std::cout << "Select slot to save character in" << std::endl;
+    std::cin >> UsersChoice;
+    return UsersChoice;
+}
 void create_character() 
 {
     std::cin.ignore();
@@ -64,7 +74,8 @@ void create_character()
     std::cout << "what's your character's class?\n";
     std::cin >> ClassInput;
     Character new_character(character_name, static_cast<SPECIE>(SpecieInput - 1), static_cast<CLASS>(ClassInput - 1), attr);
-    enter_character_save(2, new_character);
+    int save_slot_choice = available_saves();
+    enter_character_save(save_slot_choice, new_character);
 }
 int main()
 {

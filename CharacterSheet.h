@@ -116,3 +116,25 @@ void enter_character_save(int save_number, Character new_character)
 	}
 	save.close();
 }
+std::string save_print(int save_number) 
+{
+	std::string line = "";
+	std::fstream save_1_read("character_save_1.txt");
+	std::fstream save_2_read("character_save_2.txt");
+	std::fstream save_3_read("character_save_3.txt");
+	switch (save_number) 
+	{
+	case 1:
+		save_1_read >> line;
+		return line;
+		break;
+	case 2:
+		save_2_read >> line;
+		return line;
+		break;
+	case 3:
+		save_3_read >> line;
+		return line;
+		break;
+	}
+}
