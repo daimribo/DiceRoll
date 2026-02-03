@@ -3,7 +3,7 @@
 #include <fstream>
 #include <chrono>
 enum MENU_ACTION { new_character, load_character, slot_select_1, slot_select_2, slot_select_3 };
-enum SPECIE {human, halfelf, elf, tiefling};
+enum SPECIES {human, halfelf, elf, tiefling};
 enum CLASS {barbarian, bard, cleric, druid, fighter, monk, paladin, ranger, rogue, sorcerer, warlock, wizard};
 struct attributes
 {
@@ -14,30 +14,55 @@ struct attributes
 	int wisdom = 0;
 	int charisma = 0;
 };
+int level_proficiency[20]{ 2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6 };
+struct skills 
+{
+	int acrobatics = 0;
+	int animal_handling = 0;
+	int arcana = 0;
+	int athletics = 0;
+	int deception = 0;
+	int history = 0;
+	int insight = 0;
+	int intimidation = 0;
+	int investigation = 0;
+	int medicine = 0;
+	int nature = 0;
+	int perception = 0;
+	int performance = 0;
+	int persuasion = 0;
+	int religion = 0;
+	int sleight_of_hand = 0;
+	int stealth = 0;
+	int survival = 0;
+};
 class Character 
 {
 public:
-	
+	skills _skill;
 	int free_attribute_points = 0;
-	SPECIE _specie;
+	SPECIES _species;
 	CLASS _class;
 	attributes _attr;
 	std::string _name;
-	Character(std::string name, SPECIE specie, CLASS char_class, attributes attr) 
+	Character(std::string name, SPECIES species, CLASS char_class, attributes attr, skills skill) 
 	{
 		_name = name;
-		_specie = specie;
+		_species = species;
 		_class = char_class;
 		_attr = attr;
-		Get_Specie_Attribute_Bonus();
+		Get_Species_Attribute_Bonus();
+		_skill = skill;
+		Get_Skills();
+		Get_Skill_Proficiencies(1);
 	}
 	attributes Get_Attributes() 
 	{
 		return _attr;
 	}
-	void Get_Specie_Attribute_Bonus() 
+	void Get_Species_Attribute_Bonus() 
 	{
-		switch (_specie) 
+		switch (_species) 
 		{
 		case human:
 			_attr.strength++;
@@ -60,9 +85,9 @@ public:
 			break;
 		}
 	}
-	std::string Get_Specie()
+	std::string Get_Species()
 	{
-		switch (_specie)
+		switch (_species)
 		{
 		case human:
 			return "human";
@@ -120,6 +145,85 @@ public:
 			break;
 		}
 	}
+	void Get_Skills() 
+	{
+		_skill.athletics += (_attr.strength - 10) / 2;
+		_skill.acrobatics += (_attr.dexterity - 10) / 2;
+		_skill.sleight_of_hand += (_attr.dexterity - 10) / 2;
+		_skill.stealth += (_attr.dexterity - 10) / 2;
+		_skill.arcana += (_attr.intelligence - 10) / 2;
+		_skill.history += (_attr.intelligence - 10) / 2;
+		_skill.investigation += (_attr.intelligence - 10) / 2;
+		_skill.nature += (_attr.intelligence - 10) / 2;
+		_skill.religion += (_attr.intelligence - 10) / 2;
+		_skill.animal_handling += (_attr.wisdom - 10) / 2;
+		_skill.insight += (_attr.wisdom - 10) / 2;
+		_skill.medicine += (_attr.wisdom - 10) / 2;
+		_skill.perception += (_attr.wisdom - 10) / 2;
+		_skill.survival += (_attr.wisdom - 10) / 2;
+		_skill.deception += (_attr.charisma - 10) / 2;
+		_skill.intimidation += (_attr.charisma - 10) / 2;
+		_skill.performance += (_attr.charisma - 10) / 2;
+		_skill.persuasion += (_attr.charisma - 10) / 2;
+	}
+	void Get_Skill_Proficiencies(int level)
+	{
+		switch (_class)
+		{
+		case barbarian:
+			_skill.survival += level_proficiency[level];
+			_skill.athletics += level_proficiency[level];
+			break;
+		case bard:
+			_skill.performance += level_proficiency[level];
+			_skill.persuasion += level_proficiency[level];
+			_skill.deception += level_proficiency[level];
+			break;
+		case cleric:
+			_skill.religion += level_proficiency[level];
+			_skill.persuasion += level_proficiency[level];
+			break;
+		case druid:
+			_skill.animal_handling += level_proficiency[level];
+			_skill.nature += level_proficiency[level];
+			break;
+		case fighter:
+			_skill.athletics += level_proficiency[level];
+			_skill.intimidation += level_proficiency[level];
+			break;
+		case monk:
+			_skill.acrobatics += level_proficiency[level];
+			_skill.stealth += level_proficiency[level];
+			break;
+		case paladin:
+			_skill.persuasion += level_proficiency[level];
+			_skill.insight += level_proficiency[level];
+			break;
+		case ranger:
+			_skill.survival += level_proficiency[level];
+			_skill.nature += level_proficiency[level];
+			_skill.stealth += level_proficiency[level];
+			break;
+		case rogue:
+			_skill.stealth += level_proficiency[level];
+			_skill.sleight_of_hand += level_proficiency[level];
+			_skill.persuasion += level_proficiency[level];
+			_skill.investigation += level_proficiency[level];
+			break;
+		case sorcerer:
+			_skill.arcana += level_proficiency[level];
+			_skill.deception += level_proficiency[level];
+			break;
+		case warlock:
+			_skill.arcana += level_proficiency[level];
+			_skill.religion += level_proficiency[level];
+			break;
+		case wizard:
+			_skill.arcana += level_proficiency[level];
+			_skill.history += level_proficiency[level];
+			break;
+		}
+	}
 };
 int attribute_pick[6] = {};
 void Get_Character_Attributes()
@@ -134,7 +238,7 @@ void Get_Character_Attributes()
 void enter_into_file(Character new_character, std::fstream &save) 
 {
 	save << new_character._name << std::endl;
-	save << new_character.Get_Specie() << std::endl;
+	save << new_character.Get_Species() << std::endl;
 	save << new_character.Get_Class() << std::endl;
 	save << new_character._attr.strength << std::endl;
 	save << new_character._attr.dexterity << std::endl;
@@ -188,7 +292,7 @@ std::string Save_Print(int save_number)
 		break;
 	}
 }
-SPECIE Retrieve_Specie(std::string text) 
+SPECIES Retrieve_Species(std::string text) 
 {
 	if (text == "human")
 		return human;
@@ -223,13 +327,14 @@ CLASS Retrieve_Class(std::string text)
 		return sorcerer;
 	else if (text == "Warlock")
 		return warlock;
-	else if(text == "Wizard")
+	else if (text == "Wizard")
 		return wizard;
-}
-Character Load_Text(std::fstream &save) 
+};
+Character Load_Text_Into_Character(std::fstream &save) 
 {
+	skills skill;
 	std::string name;
-	SPECIE specie;
+	SPECIES species;
 	CLASS character_class;
 	attributes attr;
 	int line_number = 0;
@@ -243,7 +348,7 @@ Character Load_Text(std::fstream &save)
 			name = line;
 			break;
 		case 2:
-			specie = Retrieve_Specie(line);
+			species = Retrieve_Species(line);
 			break;
 		case 3:
 			character_class = Retrieve_Class(line);
@@ -268,7 +373,7 @@ Character Load_Text(std::fstream &save)
 			break;
 		}
 	}
-	Character Current(name, static_cast<SPECIE>(specie), static_cast<CLASS>(character_class), attr);
+	Character Current(name, static_cast<SPECIES>(species), static_cast<CLASS>(character_class), attr, skill);
 	return Current;
 }
 Character Save_Slot_Selection_Load(MENU_ACTION character_selection_slot) 
@@ -277,9 +382,9 @@ Character Save_Slot_Selection_Load(MENU_ACTION character_selection_slot)
 	std::fstream save_2("character_save_2.txt");
 	std::fstream save_3("character_save_3.txt");
 	if (character_selection_slot == slot_select_1)
-		return Load_Text(save_1);
+		return Load_Text_Into_Character(save_1);
 	else if (character_selection_slot == slot_select_2)
-		return Load_Text(save_2);
+		return Load_Text_Into_Character(save_2);
 	else if (character_selection_slot == slot_select_3)
-		return Load_Text(save_3);
+		return Load_Text_Into_Character(save_3);
 }

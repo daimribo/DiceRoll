@@ -25,15 +25,16 @@ void Create_Character()
 {
     std::cin.ignore();
     attributes attr;
+    skills skill;
     std::string character_name;
-    int specie_input;
+    int species_input;
     int attribute_input;
     int class_input;
     std::cout << "enter character's name:\n";
     getline(std::cin, character_name);
     std::cout << "[1]human\n[2]half-elf\n[3]elf\n[4]tiefling\n";
     std::cout << "what's your character's race?\n";
-    std::cin >> specie_input;
+    std::cin >> species_input;
     std::cout << "[1]Barbarian\n[2]Bard\n[3]Cleric\n[4]Druid\n[5]Fighter\n[6]Monk\n[7]Paladin\n[8]Ranger\n[9]Rogue\n[10]Sorcerer\n[11]Warlock\n[12]Wizard\n";
     std::cout << "what's your character's class?\n";
     std::cin >> class_input;
@@ -74,15 +75,15 @@ void Create_Character()
             break;
         }
     }
-    Character new_character(character_name, static_cast<SPECIE>(specie_input - 1), static_cast<CLASS>(class_input - 1), attr);
+    Character new_character(character_name, static_cast<SPECIES>(species_input - 1), static_cast<CLASS>(class_input - 1), attr, skill);
     MENU_ACTION save_slot_choice = Available_Saves();
     Enter_Character_Save(save_slot_choice, new_character);
 }
-void Load_Saved_Character() 
+Character Load_Saved_Character() 
 {
     std::cout << "Select character to use:\n";
     MENU_ACTION slot_number = Available_Saves();
-    Save_Slot_Selection_Load(slot_number);
+    return Save_Slot_Selection_Load(slot_number);
 }
 int main()
 {
