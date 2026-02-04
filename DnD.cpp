@@ -9,7 +9,7 @@ MENU_ACTION Starting_Menu()
     std::cout << "I  [1]New Character  I\n";
     std::cout << "I  [2]Load Character I\n";
     std::cin >> users_choice;
-    return static_cast<MENU_ACTION>(users_choice);
+    return static_cast<MENU_ACTION>(users_choice - 1);
 }
 MENU_ACTION Available_Saves() 
 {
@@ -17,9 +17,8 @@ MENU_ACTION Available_Saves()
     std::cout << "save slot 1: " << Save_Print(1) << std::endl;
     std::cout << "save slot 2: " << Save_Print(2) << std::endl;
     std::cout << "save slot 3: " << Save_Print(3) << std::endl;
-    std::cout << "Select slot to save character in" << std::endl;
     std::cin >> users_choice;
-    return static_cast<MENU_ACTION>(users_choice);
+    return static_cast<MENU_ACTION>(users_choice + 1);
 }
 void Create_Character() 
 {
@@ -78,6 +77,7 @@ void Create_Character()
     Character new_character(character_name, static_cast<SPECIES>(species_input - 1), static_cast<CLASS>(class_input - 1), attr, skill);
     MENU_ACTION save_slot_choice = Available_Saves();
     Enter_Character_Save(save_slot_choice, new_character);
+    std::cout << "Select slot to save character in" << std::endl;
 }
 Character Load_Saved_Character() 
 {

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <chrono>
+enum SKILL_ACTION { acrobatics, animal_handling, arcana, athletics, deception, history, insight, intimidation, investigation, medicine, nature, perception, performance, persuasion, religion, sleight_of_hand, stealth, survival };
 enum MENU_ACTION { new_character, load_character, slot_select_1, slot_select_2, slot_select_3 };
 enum SPECIES {human, halfelf, elf, tiefling};
 enum CLASS {barbarian, bard, cleric, druid, fighter, monk, paladin, ranger, rogue, sorcerer, warlock, wizard};
@@ -14,7 +15,7 @@ struct attributes
 	int wisdom = 0;
 	int charisma = 0;
 };
-int level_proficiency[20]{ 2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6 };
+int level_proficiency[20]{ 2,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0 };
 struct skills 
 {
 	int acrobatics = 0;
@@ -339,10 +340,10 @@ Character Load_Text_Into_Character(std::fstream &save)
 	attributes attr;
 	int line_number = 0;
 	std::string line;
-	while (getline(save, line)) 
+	while (getline(save, line))
 	{
 		line_number++;
-		switch (line_number) 
+		switch (line_number)
 		{
 		case 1:
 			name = line;
