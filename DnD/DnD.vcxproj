@@ -130,9 +130,6 @@
     <ClCompile Include="DnD.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\character_save_1.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="CharacterSheet.h" />
     <ClInclude Include="DnDMechanics.h" />
   </ItemGroup>

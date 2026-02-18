@@ -1,9 +1,9 @@
-szymon
+Gogurt
 half - elf
-Barbarian
-16
+Fighter
+15
+13
+12
+8
 5
-10
-4
-10
-6
+14
