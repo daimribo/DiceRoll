@@ -1,0 +1,11 @@
+﻿  DnD.cpp
+C:\Users\user\Desktop\PROJEKTY\CPP\DnD\DnD\CharacterSheet.h(259,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  (compiling source file 'DnD.cpp')
+  
+C:\Users\user\Desktop\PROJEKTY\CPP\DnD\DnD\CharacterSheet.h(322,1): warning C4715: 'Save_Print': not all control paths return a value
+C:\Users\user\Desktop\PROJEKTY\CPP\DnD\DnD\CharacterSheet.h(333,1): warning C4715: 'Retrieve_Species': not all control paths return a value
+C:\Users\user\Desktop\PROJEKTY\CPP\DnD\DnD\CharacterSheet.h(360,1): warning C4715: 'Retrieve_Class': not all control paths return a value
+C:\Users\user\Desktop\PROJEKTY\CPP\DnD\DnD\CharacterSheet.h(390,1): warning C4715: 'Save_Slot_Selection_Load': not all control paths return a value
+C:\Users\user\Desktop\PROJEKTY\CPP\DnD\DnD\CharacterSheet.h(110,1): warning C4715: 'Character::Get_Species': not all control paths return a value
+C:\Users\user\Desktop\PROJEKTY\CPP\DnD\DnD\CharacterSheet.h(152,1): warning C4715: 'Character::Get_Class': not all control paths return a value
+  DnD.vcxproj -> C:\Users\user\Desktop\PROJEKTY\CPP\DnD\x64\Debug\DnD.exe
