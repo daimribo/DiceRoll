@@ -1,8 +1,0 @@
-<Solution>
-  <Configurations>
-    <Platform Name="x64" />
-    <Platform Name="x86" />
-  </Configurations>
-  <Project Path="DnD/DnD.vcxproj" Id="f97502c6-475c-4cfa-a4a2-87090af00f71" />
-  <Project Path="DnDTests/DnDTests.vcxproj" Id="b61d0555-b45c-4db6-b962-c44558acf47b" />
-</Solution>
