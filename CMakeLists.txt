@@ -9,7 +9,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 add_subdirectory(googletest EXCLUDE_FROM_ALL)
 enable_testing()
 
-add_executable(DiceRoll src/Dnd.cpp)
+add_executable(DiceRoll src/DnD.cpp)
 
 add_executable(DiceRollTests test/test.cpp)
 

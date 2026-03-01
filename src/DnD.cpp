@@ -93,4 +93,5 @@ int main()
         Create_Character();
     else if (menu_selection == load_character)
         Load_Saved_Character();
+    return 0;
 }
