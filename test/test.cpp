@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../DnD/DnDMechanics.h"
+#include "DnDMechanics.h"
 TEST(CharacterCreationTests, Get_ClassFunctionTest) 
 {
 	Character test_character("Alfira", tiefling, bard, {}, {});
