@@ -26,8 +26,9 @@ TEST(CharacterCreationTests, Assign_SkillsFunctionTest)
 }
 TEST(CharacterCreationTests, Get_Skill_ModifierFunctionTest)
 {
-	Character test_character("Gogurt", halfelf, fighter, { 4,5,6,7,8,9 }, {2,0,1});
-	ASSERT_EQ(Get_Skill_Modifier(acrobatics), -4);
-	ASSERT_EQ(Get_Skill_Modifier(animal_handling), 0);
-	ASSERT_EQ(Get_Skill_Modifier(arcana), 1);
+	//For an instance of a local Character!! 
+	Character Current("Winning Ticket", human, cleric, {9,7,11,16,15,10}, {});
+	ASSERT_EQ(Get_Skill_Modifier(acrobatics), -1);
+	ASSERT_EQ(Get_Skill_Modifier(animal_handling), 3);
+	ASSERT_EQ(Get_Skill_Modifier(persuasion), 2);
 }

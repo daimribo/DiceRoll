@@ -388,3 +388,18 @@ Character Save_Slot_Selection_Load(MENU_ACTION character_selection_slot)
 	else if (character_selection_slot == slot_select_3)
 		return Load_Text_Into_Character(save_3);
 }
+MENU_ACTION Available_Saves() 
+{
+    std::cout << "save slot 1: " << Save_Print(1) << std::endl;
+    std::cout << "save slot 2: " << Save_Print(2) << std::endl;
+    std::cout << "save slot 3: " << Save_Print(3) << std::endl;
+	int users_choice;
+	std::cin >> users_choice;
+    return static_cast<MENU_ACTION>(users_choice + 1);
+}
+Character Load_Saved_Character() 
+{
+    std::cout << "Select character to use:\n";
+    MENU_ACTION slot_number = Available_Saves();
+    return Save_Slot_Selection_Load(slot_number);
+}

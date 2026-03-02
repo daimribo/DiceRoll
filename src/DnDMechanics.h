@@ -1,11 +1,7 @@
 //DnDMechanics.h
 #include "CharacterSheet.h"
-std::string character_name;
-SPECIES character_species;
-CLASS character_class;
-attributes character_attr;
-skills character_skills;
-Character Current(character_name, character_species, character_class, character_attr, character_skills);
+Character Current = Load_Saved_Character();
+
 int die(int die_type) 
 {
 	return (rand() % (die_type - 1)) + 1;
@@ -15,58 +11,58 @@ int Get_Skill_Modifier(SKILL_ACTION skill_choice)
 	switch (skill_choice) 
 	{
 	case acrobatics:
-		return character_skills.acrobatics;
+		return Current._skill.acrobatics;
 		break;
 	case animal_handling:
-		return character_skills.animal_handling;
+		return Current._skill.animal_handling;
 		break;
 	case arcana:
-		return character_skills.arcana;
+		return Current._skill.arcana;
 		break;
 	case athletics:
-		return character_skills.athletics;
+		return Current._skill.athletics;
 		break;
 	case deception:
-		return character_skills.deception;
+		return Current._skill.deception;
 		break;
 	case history:
-		return character_skills.history;
+		return Current._skill.history;
 		break;
 	case insight:
-		return character_skills.insight;
+		return Current._skill.insight;
 		break;
 	case intimidation:
-		return character_skills.intimidation;
+		return Current._skill.intimidation;
 		break;
 	case investigation:
-		return character_skills.investigation;
+		return Current._skill.investigation;
 		break;
 	case medicine:
-		return character_skills.medicine;
+		return Current._skill.medicine;
 		break;
 	case nature:
-		return character_skills.nature;
+		return Current._skill.nature;
 		break;
 	case perception:
-		return character_skills.perception;
+		return Current._skill.perception;
 		break;
 	case performance:
-		return character_skills.performance;
+		return Current._skill.performance;
 		break;
 	case persuasion:
-		return character_skills.persuasion;
+		return Current._skill.persuasion;
 		break;
 	case religion:
-		return character_skills.religion;
+		return Current._skill.religion;
 		break;
 	case sleight_of_hand:
-		return character_skills.sleight_of_hand;
+		return Current._skill.sleight_of_hand;
 		break;
 	case stealth:
-		return character_skills.stealth;
+		return Current._skill.stealth;
 		break;
 	case survival:
-		return character_skills.survival;
+		return Current._skill.survival;
 		break;
 	}
 
