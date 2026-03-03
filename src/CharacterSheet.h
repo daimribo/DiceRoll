@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <chrono>
+#include "DnDMechanics.h"
 enum SKILL_ACTION { acrobatics, animal_handling, arcana, athletics, deception, history, insight, intimidation, investigation, medicine, nature, perception, performance, persuasion, religion, sleight_of_hand, stealth, survival };
 enum MENU_ACTION { new_character, load_character, slot_select_1, slot_select_2, slot_select_3 };
 enum SPECIES {human, halfelf, elf, tiefling};
@@ -46,24 +47,16 @@ public:
 	CLASS _class;
 	attributes _attr;
 	std::string _name;
-	Character(std::string name, SPECIES species, CLASS char_class, attributes attr, skills skill) 
+	int _speed = 0;
+	Character(std::string name, SPECIES species, CLASS char_class, attributes attr) 
 	{
 		_name = name;
 		_species = species;
 		_class = char_class;
 		_attr = attr;
 		Get_Species_Attribute_Bonus();
-		_skill = skill;
 		Assign_Skills();
 		Get_Skill_Proficiencies(0);
-	}
-	skills Get_Skills() 
-	{
-		return _skill;
-	}
-	attributes Get_Attributes() 
-	{
-		return _attr;
 	}
 	void Get_Species_Attribute_Bonus() 
 	{
@@ -152,24 +145,24 @@ public:
 	}
 	void Assign_Skills() 
 	{
-		_skill.athletics += (_attr.strength - 10) / 2;
-		_skill.acrobatics += (_attr.dexterity - 10) / 2;
-		_skill.sleight_of_hand += (_attr.dexterity - 10) / 2;
-		_skill.stealth += (_attr.dexterity - 10) / 2;
-		_skill.arcana += (_attr.intelligence - 10) / 2;
-		_skill.history += (_attr.intelligence - 10) / 2;
-		_skill.investigation += (_attr.intelligence - 10) / 2;
-		_skill.nature += (_attr.intelligence - 10) / 2;
-		_skill.religion += (_attr.intelligence - 10) / 2;
-		_skill.animal_handling += (_attr.wisdom - 10) / 2;
-		_skill.insight += (_attr.wisdom - 10) / 2;
-		_skill.medicine += (_attr.wisdom - 10) / 2;
-		_skill.perception += (_attr.wisdom - 10) / 2;
-		_skill.survival += (_attr.wisdom - 10) / 2;
-		_skill.deception += (_attr.charisma - 10) / 2;
-		_skill.intimidation += (_attr.charisma - 10) / 2;
-		_skill.performance += (_attr.charisma - 10) / 2;
-		_skill.persuasion += (_attr.charisma - 10) / 2;
+		_skill.athletics += floor((_attr.strength - 10) / 2);
+		_skill.acrobatics += floor((_attr.dexterity - 10) / 2);
+		_skill.sleight_of_hand += floor((_attr.dexterity - 10) / 2);
+		_skill.stealth += floor((_attr.dexterity - 10) / 2);
+		_skill.arcana += floor((_attr.intelligence - 10) / 2);
+		_skill.history += floor((_attr.intelligence - 10) / 2);
+		_skill.investigation += floor((_attr.intelligence - 10) / 2);
+		_skill.nature += floor((_attr.intelligence - 10) / 2);
+		_skill.religion += floor((_attr.intelligence - 10) / 2);
+		_skill.animal_handling += floor((_attr.wisdom - 10) / 2);
+		_skill.insight += floor((_attr.wisdom - 10) / 2);
+		_skill.medicine += floor((_attr.wisdom - 10) / 2);
+		_skill.perception += floor((_attr.wisdom - 10) / 2);
+		_skill.survival += floor((_attr.wisdom - 10) / 2);
+		_skill.deception += floor((_attr.charisma - 10) / 2);
+		_skill.intimidation += floor((_attr.charisma - 10) / 2);
+		_skill.performance += floor((_attr.charisma - 10) / 2);
+		_skill.persuasion += floor((_attr.charisma - 10) / 2);
 	}
 	void Get_Skill_Proficiencies(int level)
 	{
@@ -227,6 +220,81 @@ public:
 			_skill.arcana += level_proficiency[level];
 			_skill.history += level_proficiency[level];
 			break;
+		}
+	}
+	int Get_Skill_Modifier(SKILL_ACTION skill_choice) 
+	{
+		switch (skill_choice) 
+		{
+		case acrobatics:
+			return _skill.acrobatics;
+			break;
+		case animal_handling:
+			return _skill.animal_handling;
+			break;
+		case arcana:
+			return _skill.arcana;
+			break;
+		case athletics:
+			return _skill.athletics;
+			break;
+		case deception:
+			return _skill.deception;
+			break;
+		case history:
+			return _skill.history;
+			break;
+		case insight:
+			return _skill.insight;
+			break;
+		case intimidation:
+			return _skill.intimidation;
+			break;
+		case investigation:
+			return _skill.investigation;
+			break;
+		case medicine:
+			return _skill.medicine;
+			break;
+		case nature:
+			return _skill.nature;
+			break;
+		case perception:
+			return _skill.perception;
+			break;
+		case performance:
+			return _skill.performance;
+			break;
+		case persuasion:
+			return _skill.persuasion;
+			break;
+		case religion:
+			return _skill.religion;
+			break;
+		case sleight_of_hand:
+			return _skill.sleight_of_hand;
+			break;
+		case stealth:
+			return _skill.stealth;
+			break;
+		case survival:
+			return _skill.survival;
+			break;
+		deafult:
+			return _skill.investigation;
+		}
+	}
+	void Skill_Check(SKILL_ACTION skill_choice) 
+	{
+		int result = die(20);
+		if(result == 20)
+			std::cout<<"CRITICAL SUCCESS\n";
+		else if(result == 1)
+			std::cout<<"CRITICAL FAILURE\n";
+		else
+		{
+			result += Get_Skill_Modifier(skill_choice);
+			std::cout<<_name<<" Rolled a "<< result<<std::endl;
 		}
 	}
 	bool operator== (Character const& rhs) const
@@ -373,7 +441,7 @@ Character Load_Text_Into_Character(std::istream &save)
 	save >> attr.intelligence;
 	save >> attr.wisdom;
 	save >> attr.charisma;
-	Character Current(name,Retrieve_Species(species), Retrieve_Class(character_class), attr, {});
+	Character Current(name,Retrieve_Species(species), Retrieve_Class(character_class), attr);
 	return Current;
 }
 Character Save_Slot_Selection_Load(MENU_ACTION character_selection_slot) 

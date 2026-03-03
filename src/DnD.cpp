@@ -65,18 +65,20 @@ void Create_Character()
             break;
         }
     }
-    Character new_character(character_name, static_cast<SPECIES>(species_input - 1), static_cast<CLASS>(class_input - 1), attr, skill);
+    Character new_character(character_name, static_cast<SPECIES>(species_input - 1), static_cast<CLASS>(class_input - 1), attr);
     MENU_ACTION save_slot_choice = Available_Saves();
     Enter_Character_Save(save_slot_choice, new_character);
     std::cout << "Select slot to save character in" << std::endl;
 }
 int main()
 {
-	std::cout << "My change\n";
     MENU_ACTION menu_selection = Starting_Menu();
     if (menu_selection == new_character)
         Create_Character();
     else if (menu_selection == load_character)
-        Load_Saved_Character();
+    {
+        Character loaded_character = Load_Saved_Character();
+        loaded_character.Skill_Check(religion);
+    }
     return 0;
 }
