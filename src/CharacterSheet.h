@@ -1,7 +1,7 @@
 //CharacterSheet.h
 #include <iostream>
 #include <fstream>
-#include <chrono>
+#include <cmath>
 #include "DnDMechanics.h"
 enum SKILL_ACTION { acrobatics, animal_handling, arcana, athletics, deception, history, insight, intimidation, investigation, medicine, nature, perception, performance, persuasion, religion, sleight_of_hand, stealth, survival };
 enum MENU_ACTION { new_character, load_character, slot_select_1, slot_select_2, slot_select_3 };
