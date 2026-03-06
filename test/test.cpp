@@ -24,3 +24,19 @@ TEST(CharacterCreationTests, Assign_SkillsFunctionTest)
 	ASSERT_EQ(test_character._skill.persuasion, 2);
 	ASSERT_EQ(test_character._skill.survival, 3);
 }
+TEST(CharacterCreationTests, Get_Skill_ModifierFunctionTest)
+{
+	Character test_character("Johnny Silverhand", human, barbarian, {16,9,15,11,11,12});
+	ASSERT_EQ(test_character.Get_Skill_Modifier(athletics), 5);
+	ASSERT_EQ(test_character.Get_Skill_Modifier(survival), 3);
+	ASSERT_EQ(test_character.Get_Skill_Modifier(acrobatics), 0);
+}
+TEST(CharacterLoadingTests, RetrieveFunctionsTest)
+{
+	ASSERT_EQ(Retrieve_Species("human"), human);
+	ASSERT_EQ(Retrieve_Species("tiefling"), tiefling);
+	ASSERT_EQ(Retrieve_Species(""), human);
+	ASSERT_EQ(Retrieve_Class("Barbarian"), barbarian);
+	ASSERT_EQ(Retrieve_Class("Wizard"), wizard);
+	ASSERT_EQ(Retrieve_Class(""), paladin);
+}

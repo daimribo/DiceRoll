@@ -145,24 +145,24 @@ public:
 	}
 	void Assign_Skills() 
 	{
-		_skill.athletics += floor((_attr.strength - 10) / 2);
-		_skill.acrobatics += floor((_attr.dexterity - 10) / 2);
-		_skill.sleight_of_hand += floor((_attr.dexterity - 10) / 2);
-		_skill.stealth += floor((_attr.dexterity - 10) / 2);
-		_skill.arcana += floor((_attr.intelligence - 10) / 2);
-		_skill.history += floor((_attr.intelligence - 10) / 2);
-		_skill.investigation += floor((_attr.intelligence - 10) / 2);
-		_skill.nature += floor((_attr.intelligence - 10) / 2);
-		_skill.religion += floor((_attr.intelligence - 10) / 2);
-		_skill.animal_handling += floor((_attr.wisdom - 10) / 2);
-		_skill.insight += floor((_attr.wisdom - 10) / 2);
-		_skill.medicine += floor((_attr.wisdom - 10) / 2);
-		_skill.perception += floor((_attr.wisdom - 10) / 2);
-		_skill.survival += floor((_attr.wisdom - 10) / 2);
-		_skill.deception += floor((_attr.charisma - 10) / 2);
-		_skill.intimidation += floor((_attr.charisma - 10) / 2);
-		_skill.performance += floor((_attr.charisma - 10) / 2);
-		_skill.persuasion += floor((_attr.charisma - 10) / 2);
+		_skill.athletics = floor((_attr.strength - 10) / 2);
+		_skill.acrobatics = floor((_attr.dexterity - 10) / 2);
+		_skill.sleight_of_hand = floor((_attr.dexterity - 10) / 2);
+		_skill.stealth = floor((_attr.dexterity - 10) / 2);
+		_skill.arcana = floor((_attr.intelligence - 10) / 2);
+		_skill.history = floor((_attr.intelligence - 10) / 2);
+		_skill.investigation = floor((_attr.intelligence - 10) / 2);
+		_skill.nature = floor((_attr.intelligence - 10) / 2);
+		_skill.religion = floor((_attr.intelligence - 10) / 2);
+		_skill.animal_handling = floor((_attr.wisdom - 10) / 2);
+		_skill.insight = floor((_attr.wisdom - 10) / 2);
+		_skill.medicine = floor((_attr.wisdom - 10) / 2);
+		_skill.perception = floor((_attr.wisdom - 10) / 2);
+		_skill.survival = floor((_attr.wisdom - 10) / 2);
+		_skill.deception = floor((_attr.charisma - 10) / 2);
+		_skill.intimidation = floor((_attr.charisma - 10) / 2);
+		_skill.performance = floor((_attr.charisma - 10) / 2);
+		_skill.persuasion = floor((_attr.charisma - 10) / 2);
 	}
 	void Get_Skill_Proficiencies(int level)
 	{
@@ -331,7 +331,7 @@ void Get_Character_Attributes()
 		std::cout << "[" << i + 1 << "]" << " " << attribute_pick[i] << std::endl;
 	}
 }
-void enter_into_file(Character new_character, std::fstream &save) 
+void Enter_Into_File(Character new_character, std::fstream &save) 
 {
 	save << new_character._name << std::endl;
 	save << new_character.Get_Species() << std::endl;
@@ -350,19 +350,19 @@ void Enter_Character_Save(MENU_ACTION save_number, Character new_character)
 	{
 		save.open("character_save_1.txt");
 		std::fstream save("character_save_1.txt", std::ios::app);
-		enter_into_file(new_character, save);
+		Enter_Into_File(new_character, save);
 	}
 	if (save_number == slot_select_2)
 	{
 		save.open("character_save_2.txt");
 		std::fstream save("character_save_2.txt", std::ios::app);
-		enter_into_file(new_character, save);
+		Enter_Into_File(new_character, save);
 	}
 	if (save_number == slot_select_3)
 	{
 		save.open("character_save_3.txt");
 		std::fstream save("character_save_3.txt", std::ios::app);
-		enter_into_file(new_character, save);
+		Enter_Into_File(new_character, save);
 	}
 	save.close();
 }
@@ -398,6 +398,8 @@ SPECIES Retrieve_Species(std::string text)
 		return elf;
 	else if (text == "tiefling")
 		return tiefling;
+	else
+		return human;
 }
 CLASS Retrieve_Class(std::string text)
 {
@@ -425,6 +427,8 @@ CLASS Retrieve_Class(std::string text)
 		return warlock;
 	else if (text == "Wizard")
 		return wizard;
+	else
+		return paladin;
 };
 Character Load_Text_Into_Character(std::istream &save) 
 {
