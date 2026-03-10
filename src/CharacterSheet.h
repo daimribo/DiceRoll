@@ -331,7 +331,7 @@ void Get_Character_Attributes()
 		std::cout << "[" << i + 1 << "]" << " " << attribute_pick[i] << std::endl;
 	}
 }
-void Enter_Into_File(Character new_character, std::fstream &save) 
+void Enter_Into_File(Character new_character, std::ostream &save) 
 {
 	save << new_character._name << std::endl;
 	save << new_character.Get_Species() << std::endl;
